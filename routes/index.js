@@ -1,8 +1,9 @@
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const {checkUser} = require('../middlware/authMiddleware.js')
+const router = express.Router()
 
 // Index route
-router.get('/', (req, res) => {
+router.get('/', checkUser,(req, res) => {
   // Handle the index route logic here
   res.render('index', {
     title:"HOME"
