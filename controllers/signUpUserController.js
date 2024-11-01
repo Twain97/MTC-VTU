@@ -31,7 +31,7 @@ if(err.code==11000){
 const maxAge = 3 * 24 * 60 * 60
 
 const createToken = (id) => {
-  return jwt.sign({id}, 'religionCentre secret', {
+  return jwt.sign({id}, 'mtcvtuSecretKey', {
     expiresIn:maxAge
   })
 }

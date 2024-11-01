@@ -7,7 +7,7 @@ const requireAuth = (req, res, next)=>{
 
     // check if jwt exists
     if(token){
-        jwt.verify(token, "religionCentre secret", (err, decodedToken)=>{
+        jwt.verify(token, "mtcvtuSecretKey", (err, decodedToken)=>{
             if(err){
                 console.log(err.message);
                 res.redirect('/');
@@ -27,7 +27,7 @@ const requireAuth = (req, res, next)=>{
 const checkUser = (req, res, next)=>{
     const token = req.cookies.jwt
     if(token){
-        jwt.verify(token, "religionCentre secret", async (err, decodedToken)=>{
+        jwt.verify(token, "mtcvtuSecretKey", async (err, decodedToken)=>{
             if(err){
                 console.log(err.message);
                 res.locals.user = null;
@@ -61,7 +61,7 @@ const checkUser = (req, res, next)=>{
 const routeGuide = (req, res, next)=>{
     const token = req.cookies.jwt
     if(token){
-        jwt.verify(token, "religionCentre secret", async (err, decodedToken)=>{
+        jwt.verify(token, "mtcvtuSecretKey", async (err, decodedToken)=>{
             if(err){
                 console.log(err.message);
               return  next();

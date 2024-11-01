@@ -34,7 +34,7 @@ const handleErrors = (err)=>{
 const maxAge = 1 * 24 * 60 * 60
 
 const createToken = (id) => {
-  return jwt.sign({id, role: "User"}, 'religionCentre secret', {   // religionCentre secret is the jwt secret key to sign the token
+  return jwt.sign({id, role: "User"}, 'mtcvtuSecretKey', {   // mtcvtuSecretKey is the jwt secret key to sign the token
     expiresIn:maxAge
   })
 }

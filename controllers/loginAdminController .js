@@ -28,7 +28,7 @@ if(err.message === "Incorrect password"){
 const maxAge = 3 * 24 * 60 *60    // 3days
 
 const createToken = (id)=>{
-  return jwt.sign({id, role:"admin"}, 'religionCentre secret', {
+  return jwt.sign({id, role:"admin"}, 'mtcvtuSecretKey', {
     expiresIn: maxAge
   });
 }
