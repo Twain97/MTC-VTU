@@ -1,0 +1,37 @@
+<nav class=" ">
+
+    <ul class="">
+        <li class="absolute z-50 w-full top-2 flex justify-between py-5 pl-10 pr-5 border-red-500  bg-transparent">
+            <% if (!user) { %>
+                <h1 class="my-auto font-bold text-white text-base ">Welcome.</h1>
+                <div class=" flex " >
+                    <a href="/" class="  bg-blue-500 hover:bg-blue-900 text-white p-2 text-sm  mx-1 rounded-lg "> COMPENDIUM</a>
+                    <a href="/loginUser" class="  bg-blue-500 hover:bg-blue-900 text-white p-2 text-sm  mx-1 rounded-lg "> LOGIN</a>
+                    <a href='/signUpUser' class="  bg-blue-500 hover:bg-blue-900 text-white p-2 text-sm  mx-1 rounded-lg"> REGISTER</a>
+                    <a href="/about" class=" bg-blue-500 hover:bg-blue-900 text-white p-2 text-sm  mx-1 rounded-lg"> ABOUT US</a>
+                   
+                </div>
+                
+            <% }else{ %>
+                
+                <% if (user.role == 'user') { %>
+                <h1 class="my-auto font-bold text-blue-500 text-base">Welcome, <%= user.name %></h1>
+                <div class=" flex w-fit" >
+                    <a href="/user" class="  bg-blue-500 hover:bg-blue-900 text-white p-2 text-sm  mx-1 rounded-lg "> HOME</a>
+                    <a href="/" class="  bg-blue-500 hover:bg-blue-900 text-white p-2 text-sm  mx-1 rounded-lg"> COMPENDIUM</a>
+                    <a href="/about" class="  bg-blue-500 hover:bg-blue-900 text-white p-2 text-sm  mx-1 rounded-lg"> ABOUT US</a>
+                    <a href="/logout" class="  bg-blue-500 hover:bg-blue-900 text-white p-2 text-sm  mx-1 rounded-lg "> LOGOUT</a>
+                </div>
+                <% } else if (user.role === 'admin') { %>
+                <div class=" flex w-fit" >
+                    <a href="/admin" class="  bg-blue-500 hover:bg-blue-900 text-white p-2 text-sm  mx-1 rounded-lg"> DASHBOARD</a>
+                    <a href="/logout" class="  bg-blue-500 hover:bg-blue-900 text-white p-2 text-sm  mx-1 rounded-lg "> LOGOUT</a>
+                </div>
+                    <% } %>    
+                <% } %>
+
+                
+        </li>
+        
+    </ul>
+</nav>

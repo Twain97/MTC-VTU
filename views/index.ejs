@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<style>
+    #home{
+        background: linear-gradient(20deg, rgba(4, 2, 30, 0.281), rgba(0, 0, 0, 0.726)), url('/worshiper.jpg');
+        background-repeat: no-repeat;
+        background-blend-mode: darken;
+        height: 100vh;
+        background-size:100%;
+    }
+</style>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div id="home" class="w- flex flex-col text-center  bg-blue-600 text-white">
+        <div class=" border-blue-500 w-full m-auto">
+            <h1 class=" text-6xl w-fit mt-10 font-bold px-14 border-red-500">MTC-VTU.COM</h1>
+            <div class="text-base bg-transparent p-2 w-fit mt-20 rounded-full border-2 border-slate-300 font-semibold mx-auto" onclick="scrollToCompendium()"> <a href="/"></a> <span class="cursor-pointer border-slate-300 rounded-full p-1"> Read More.</span></div>
+        </div>
+       
+    </div>
+    <div class="w-full  border-green-500 flex">
+        <div class="w-full bg-slate-100 px-4 py-5 border-red-300 rounded-lg shadow-lg">
+            <div id="compendium" class=" flex flex-col space-y-6">
+                <div><p class="font-bold text-2xl text-center">other details here!</p></div>
+                
+               
+            </div>
+        </div>
+    </div>
+
+    <%- include('./partials/footer.ejs') %>
+</body>
+<script>
+     const scrollToCompendium = () =>{ 
+            const element = document.getElementById('compendium');
+            element.scrollIntoView({ behavior: 'smooth' });
+            toggleCollapse2()
+        }
+</script>
+</html>

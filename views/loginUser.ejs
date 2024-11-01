@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="w-full h-fit mt-20 flex">
+        <div class="md:w-2/4 bg-slate-200 px-4 py-10 border-red-500 my-5 mx-auto rounded-lg shadow-lg">
+            <div class="text-xl flex space-x-1">
+                <h1> user Login.</h1>
+            </div>
+            <div class="">
+                <fieldset class="border border-black p-5 rounded-lg">
+                    <legend class="ml-2 text-blue-500 font-semibold">Login to your account.</legend>
+                    <form>
+                        <p class="my-5 text-sm">Please enter your email and password to login.</p>
+                        <div class="border-red-500 p-2 bg-white flex">
+                            <label for="Email"><i class="fas fa-envelope mr-5 text-blue-700"></i></label>
+                            <input type="email" name="email" id="email" required class="w-full">
+                            <div class="email error text-xs text-red-500"></div>
+                        </div>
+                        <br>
+                        <div class="border-red-500 p-2 bg-white flex">
+                            <label for="password"><i class="fas fa-lock mr-5 text-blue-700"></i></label>
+                            <input type="password" name="password" id="password" required class="w-full">
+                            <div class="password error text-xs text-red-500"></div>
+                        </div>
+                        
+                        <br>
+                        
+                        <div class="justify-self-end w-fit border-red-500 bg-blue-700 px-2 py-1 rounded-md shadow-lg">
+                            <input type="submit" value="Log In" class="text-white">
+                            <i class='fas fa-sign-in-alt text-white' ></i>
+                        </div>
+
+                        <div class="text-sm mt-10 border-red-500">
+                            <p> Don't have an account yet? <a href='/signUpUser' class="text-blue-600">Create an account.</a></p>
+
+                        </div>
+                        
+                    </form>
+                </fieldset> 
+            </div>
+            
+        </div>
+    </div>
+    
+
+    <%- include('./partials/footer.ejs') %>
+
+
+    <script>
+        const form = document.querySelector('form')
+
+        const emailError = document.querySelector('.email.error')
+        const passwordError = document.querySelector('.password.error')
+
+
+        form.addEventListener('submit', async (e)=>{
+            e.preventDefault();
+        
+            //reset errors
+            emailError.textContent = ''
+            passwordError.textContent = ''
+
+
+           
+            const email = form.email.value;
+            const password = form.password.value;
+
+            try{
+                const res = await fetch('/loginUser', {
+                    method:'POST',
+                    body:JSON.stringify({
+                        email,
+                        password,
+                        
+                    }),
+                    headers:{'Content-Type': 'application/json'}
+                });
+
+                const data = await res.json();
+                console.log(data)
+
+                if(data.errors){
+                   emailError.textContent = data.errors.email;
+                   passwordError.textContent = data.errors.password;
+                  
+
+                }
+                // direct home if user is created
+                if(data.user){
+                    location.assign('/user')
+                }
+            }catch(err){
+                console.log(err)
+            }
+        })
+    </script>
+</body>
+</html>

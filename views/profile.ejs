@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="w-full h-fit mt-20 border-green-500 flex">
+        <div class="md:w-2/4 bg-slate-200 px-4 py-5 border-red-300 my-5 mx-auto rounded-lg shadow-lg">
+            <div class="text-xl flex space-x-1">
+                <!-- <img src="/logo.png" alt="" class="w-8"> -->
+                <i class="fas fa-user fa-2x"></i>
+                   <h1 class="font-semibold">  My Profile.</h1>
+            </div>
+            <div class="text-base mt-5 flex flex-col space-y-6">
+                <% if (user.role == 'member') { %>
+                <p><span class="ml-2 font-bold text-lg">Full Name: </span><%= user.name %></p>
+                <p><span class="ml-2 font-bold text-lg">Email: </span><%= user.email%></p>
+                <p><span class="ml-2 font-bold text-lg">Age: </span> <%= user.age %> years.</p>
+                <p><span class="ml-2 font-bold text-lg">Gender: </span> <%= user.gender %></p>
+                <p><span class="ml-2 font-bold text-lg">Contact Information: </span><%= user.contactInformation %></p>
+
+
+                <div class="justify-self-end w-fit border-red-500 bg-blue-700 px-2 py-1 rounded-md shadow-lg">
+                            <a href="/member" class="text-white">Go Back</a>
+                </div>
+
+                
+                <% } else { %>
+                 <p>No user found. Please login!</p>
+                <% } %>
+                
+
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

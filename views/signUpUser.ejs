@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="w-full h-fit  border-green-500 flex">
+        <div class="md:w-2/4 mt-20 bg-slate-200 px-4 py-5 border-red-300 my-5 mx-auto rounded-lg shadow-lg">
+            <div class="text-xl flex space-x-1">
+            <h1> User Register.</h1>
+            </div>
+            <div class="">
+                <fieldset class="border border-slate-500 p-5 rounded-lg">
+                    <legend class="ml-2 text-blue-500 font-semibold">Create your account.</legend>
+                    <form action="/signUpUser" method="post">
+                        <p class="mb-2 text-sm">Please enter your details to create account.</p>
+                        
+
+                        <div class=" border-red-500 my-1 p-2 w-full bg-white rounded-t-md flex">
+                            <label for="name">Full Name:</label>
+                            <input type="text" name="name" id="name" required class="rounded-lg w-3/4 h-8 mx-auto border">
+                            <div class="name error"></div>
+                        </div>
+
+                        <div class=" border-red-500 my-1 p-2 bg-white flex">
+                            <label for="mail">Email:</label>
+                            <input type="email" name="email" id="email" required class="rounded-lg w-3/4 h-8 mx-auto border">
+                            <div class="email error"></div>
+                        </div>
+
+                        <div class=" border-red-500 my-1 p-2 bg-white flex">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password" required class="rounded-lg w-3/4 h-8 mx-auto border">
+                            <div class="password error"></div>
+                        </div>
+
+                        <div class="border-red-500 p-2 bg-white flex">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" name="confirmPassword" id="confirmPassword" required class="w-3/4 h-8 mx-auto rounded-lg border">
+                            <div class="password error"></div>
+                        </div>
+
+                        <div class=" border-red-500 my-1 p-2 bg-white flex">
+                            <label for="age">age:</label>
+                            <input type="text" name="age" id="age" required class="rounded-lg w-3/4 h-8 mx-auto border">
+                            <div class="age error"></div>
+                        </div>
+
+                        <div class=" border-red-500 my-1 p-2 bg-white flex">
+                            <label for="gender" class="mr-2">Gender:</label>
+                            <input type="radio" name="gender" class="gender" value="male" >
+                            Male
+                            <input type="radio" name="gender" class="gender" value="female" class="ml-2">
+                            female
+                            <div class="gender error"></div>
+                        </div>
+
+                        <div class="hidden border-red-500 my-1 p-2 bg-white">
+                            <label for="role">Role:</label>
+                            <input type="text" name="role" id="role" class="rounded-lg w-3/4 h-8 mx-auto border" disabled value="user">
+                            <div class="role error"></div>
+                        </div>
+
+                        <div class=" border-red-500 my-1 p-2 bg-white flex rounded-b-md">
+                            <label for="contactInformation">Contact Information:</label>
+                            <input type="text" name="contactInformation" id="contactInformation" required class="rounded-lg w-3/4 h-8 mx-auto border">
+                            <div class="contactInformation error"></div>
+                        </div>
+
+                        <div class="justify-self-end mt-2 w-fit border-red-500 bg-blue-700 px-2 py-1 rounded-md shadow-lg">
+                            <input type="submit" value="Create Account" class="text-white">
+                            <i class='fas fa-sign-in-alt text-white' ></i>
+                        </div>
+
+                        <div class="text-sm mt-5 border-red-500">
+                            <p> Already a user? <a href='/loginUser' class="text-blue-600">Log into account.</a></p>
+
+                        </div>
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+
+    
+    <%- include('./partials/footer.ejs') %>
+
+
+
+    <script>
+        const form = document.querySelector('form')
+
+        form.role.value = 'user'
+
+
+        //error messages in div tags
+        const emailError = document.querySelector('.email')
+        const passwordError = document.querySelector('.password')
+        const nameError = document.querySelector('.name')
+        const contactInformationError = document.querySelector('.contactInformation')
+
+        form.addEventListener('submit', async (e)=>{
+            e.preventDefault()
+
+            const name = form.name.value
+            const email = form.email.value
+            const password = form.password.value
+            const age = form.age.value
+            const role = form.role.value
+            const gender = form.gender.value
+            const contactInformation = form.contactInformation.value
+
+            try{
+                const res = await fetch('/signUpUser', {
+                    method: 'POST',
+                    body:JSON.stringify({
+                        name,
+                        email,
+                        password,
+                        age,
+                        role, 
+                        gender, 
+                        contactInformation,
+                    }), 
+                    headers:{'Content-Type':'application/json'}
+                })
+
+                const data = await res.json()
+
+                if(data.errors){
+                    emailError.textContent = data.errors.email
+                    passwordError.textContent = data.errors.password
+                    nameError.textContent = data.errors.name
+                    ageError.textContent = data.errors.age
+                    genderError.textContent = data.errors.gender
+                    contactInformationError.textContent = data.errors.contactInformation
+                    medicalHistoryError.textContent = data.errors.medicalHistory
+                }
+
+                if(data.user){
+                    location.assign('/user')
+                }
+            }catch (err){
+                console.log(err)
+            }
+        })       
+    </script>
+</body>
+</html>

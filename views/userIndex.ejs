@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class=" border-red-500 mt-20 w-full h-ht8 ">
+        <div class=" flex justify-around bg-slate-50 h-full md:w-2/3 mx-auto border-blue-500 ">
+            <div class="my-auto p-4  border-red-500 h-fit cursor-pointer rounded-lg bg-slate-100">
+                <a href='/profile' class="flex flex-col">
+                    <div class="mx-auto">
+                        <i class="fas fa-user fa-2x text-blue-700"></i>
+                    </div>
+                    <div class="flex flex-col   border-green w-fit">
+                        <p class="text-blue-500 text-xl">My Profile.</p>
+                        <p class="text-sm text-blue-500">View your profile</p>
+                        <p class="text-slate-600 text-sm text-center">Click here.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="my-auto p-4 border-red-500 h-fit cursor-pointer rounded-lg bg-slate-100">
+                <a href='/userBlogs' class="flex flex-col">
+                    <div class="mx-auto">
+                        <i class="fas fa-newspaper fa-2x text-blue-700"></i>
+                    </div>
+                    <div class="flex flex-col  text-center border-green w-fit">
+                        <p class="text-blue-500 text-xl">Compendium.</p>
+                        <p class="text-sm text-blue-500">View Compendiums Written By You.</p>
+                        <p class="text-slate-600 text-sm text-center">Click here.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class=" my-auto p-4 border-red-500 h-fit  cursor-pointer rounded-lg bg-slate-100">
+                <a href='/create' class="flex flex-col">
+                    <div class="mx-auto ">
+                        <i class="fas fa-clipboard-list fa-2x text-blue-700"></i>
+                    </div>
+                    <div class="flex flex-col text-center border-green my-auto">
+                        <p class="text-blue-500 text-xl">Create A New Compendium.</p>
+                        <p class="text-sm text-blue-500 text-center">New Compendium.</p>
+                        <p class="text-slate-600 text-sm text-center">Click here.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+    
+
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

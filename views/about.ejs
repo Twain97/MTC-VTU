@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    <div class="w-full h-fit  border-green-500 flex">
+        <div class="md:w-wd9 mt-20  bg-slate-200 px-4 py-5 border-red-300 mx-auto rounded-lg shadow-lg">
+            <div class=" flex flex-col space-y-6">
+                <div><p class="font-bold text-2xl">About Us</p> 
+                <p>Our religious center is dedicated to serving the community through various spiritual and social programs. We aim to be a beacon of hope and support for everyone.</p>
+                </div>
+
+                <h2 class="font-bold text-2xl">Services</h2>
+                <ul class="ml-10 list-disc list-inside">
+                    <li >Weekly Worship Services.</li>
+                    <li>Bible Study Groups.</li>
+                    <li>Community Outreach Programs.</li>
+                    <li>Youth and Family Services.</li>
+                </ul>
+
+                <h2 class="font-bold text-2xl">Resources</h2>
+                <p>Access various resources including sermons, articles, and other materials to enhance your spiritual journey.</p>
+
+                <h2 class="font-bold text-2xl">Contact Us</h2>
+                <p>If you have any questions or need assistance, feel free to reach out to us at:</p>
+                <p>Email: <a href="mailto:info@religiouscenter-ekiti.org">info@religiouscenter-ekiti.org</a></p> 
+                <p>Phone: <a href="tel:+2341234567">+234 123 4567</a></p> 
+
+
+                <% if (user) { %>
+                    <% if (user.role == 'user') { %>
+                        <div class="justify-self-end w-fit border-red-500 bg-blue-700 px-2 py-1 rounded-md shadow-lg">
+                            <a href="/user" class="text-white">Go Back</a>
+                        </div>
+                    <% }else{ %>
+                        <div class="justify-self-end w-fit border-red-500 bg-blue-700 px-2 py-1 rounded-md shadow-lg">
+                            <a href="/" class="text-white">Go Back</a>
+                        </div>
+                    <% } %>
+                     
+                <% } else if (!user) { %>
+                    <div class="justify-self-end w-fit border-red-500 bg-blue-700 px-2 py-1 rounded-md shadow-lg">
+                        <a href="/" class="text-white">Go Back</a>
+                    </div>
+                <% } %>
+
+                 
+                
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('./partials/footer.ejs') %>
+</body>
+</html>

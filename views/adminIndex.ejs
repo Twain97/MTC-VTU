@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+    <%- include('./partials/nav.ejs') %>
+<div class="flex mt-20  mb-10 flex-col h-fit rounded-xl py-10  mx-auto pb-2 w-fit md:w-wd8 lg:w-wd8 xl:w-wd45 bg-slate-100 shadow-sm">
+            
+    <div class="flex  flex-col z-50 my-auto  md:py-2 w-full h-full border-blue-500">
+    <div class="w-full h-full py-2 flex flex-col px-2  border-red-500 mx-auto space-y-10">
+ 
+        <div class="w-full   space-y-2 flex flex-col border-green-500 ">
+            <h2 class="text-slate-800 mx-auto font-bold text-lg md:text-2xl uppercase">Users.</h2>
+            <table class="">
+                <tr class="border-black rounded-t-xl border-2 md:border-4  font-bold text-center text-sm md:text-lg uppercase">
+                    <% if (users.length > 0) { %> %>
+                        <td>#</td>
+                        <td>User Name</td>
+                        <td>Age</td>
+                        <td>Gender</td>
+                        <td >Contact Info</td>
+                        <td>Delete User</td>
+                </tr>
+                    <% var index = 1 %>
+                            <% users.forEach(user =>{ %>
+                                <tr class="text-center">
+                                    <td class="border-black   w-fit uppercase p-1"><%= index++ %></td>
+                                    <td class="border-black   w-fit uppercase p-1"><%= user.name %></td>
+                                    <td class="border-black   w-fit uppercase p-1"><%= user.age %></td>
+                                    <td class="border-black   w-fit uppercase p-1"><%= user.gender %></td>
+                                    <td class="border-black   w-fit uppercase p-1"><%= user.contactInformation %></td>
+                                    <td class="border-black flex  w-full uppercase p-1">
+                                        <button class="bg-blue-500 mx-auto hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="deleteUser('<%= user._id %>')">Delete User</button">
+                                    </td>
+                                </tr>
+                                <% index++; %>
+                            <%}) %>
+                        
+                    <% } else{ %>
+                        <p>no user</p>
+                    <% } %> %>
+                </tr>
+            </table>
+        </div>    
+    
+    </div>
+</div>
+</div>
+
+    <%- include('./partials/footer.ejs') %>
+
+    <script>
+
+async function deleteUser(id) {
+  try {
+    if (confirm("Are you sure you want to delete this?")) {
+      const res = await fetch(`/users/${id}`, {
+        method: 'DELETE'
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(`User ID(${id}) deleted successfully!`);
+        window.location.reload();
+      } else {
+        throw new Error(data.message || 'Could not delete user.');
+      }
+    }
+  } catch (err) {
+    console.error(err);
+    alert(err.message);
+  }
+}
+
+
+
+
+// use this to update user details in the admin dashboard
+
+// const forms = document.querySelectorAll('form'); // Select all forms
+
+// forms.forEach(form => {
+//     form.addEventListener('submit', async (e) => {
+//         e.preventDefault(); // Prevent default form submission
+
+//         try{
+//             // Get the row containing the submitted form
+//              const row = e.target.closest('tr'); 
+
+//             // Assuming the blog ID is in the second <td> (index 1)
+//             const id = row.querySelectorAll('td')[1].textContent;
+//             const title = row.querySelectorAll('td')[2].textContent;
+            
+//             const status = row.querySelector('select').value
+//             const author = row.querySelectorAll('td')[3].textContent;
+//             const createdAt = row.querySelectorAll('td')[4].textContent;
+//             const updatedAt = row.querySelectorAll('td')[5].textContent;
+//             // const Date = row.querySelectorAll('td')[5].textContent;
+//             // const Time = row.querySelectorAll('td')[6].textContent;
+
+//             const res = await fetch('/blogs', {
+//                 method:'PUT',
+//                 body:JSON.stringify({
+//                     id,
+//                     author,
+//                     createdAt,
+//                     updatedAt,
+//                     title,
+//                     status
+//                 }),
+//                 headers:{'Content-Type': 'application/json'
+//                 }
+//             })
+
+//             const data = await res.json();
+
+//             alert('Status updated!')
+//         }catch(err){
+//             console.log(err)
+//         }
+        
+//     });
+// });
+       
+    </script>
+</body>
+</html>
